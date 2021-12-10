@@ -2,9 +2,6 @@ const { CommandInteraction } = require("discord.js");
 
 module.exports = {
   name: "interactionCreate",
-  /**
-   * @param {CommandInteraction} interaction
-   */
   run: async (client, interaction) => {
     if (!interaction.isCommand()) return;
 
