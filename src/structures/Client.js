@@ -5,14 +5,14 @@ const { readdirSync } = require("fs");
 module.exports = class Xmas101Client extends Client {
   constructor() {
     super({
-      intents: [Object.values(Intents.FLAGS)],
+      intents: Object.keys(Intents.FLAGS),
       partials: ["CHANNEL", "GUILD_MEMBER", "MESSAGE", "REACTION", "USER"],
       restTimeOffset: 60,
       allowedMentions: { parse: ["users"] },
     });
 
     this.commands = new Collection();
-    this.aliases = new Collection();
+    this.slashCommands = [];
 
     this.color = "#68B88C";
 
@@ -35,8 +35,7 @@ module.exports = class Xmas101Client extends Client {
         file = require(`../commands/${dir}/${file}`);
         console.log(`Loaded command: ${file.name}`);
         this.commands.set(file.name, file);
-        if (file.aliases)
-          file.aliases.map((a) => this.aliases.set(a, file.name));
+        this.slashCommands.push(file);
       }
     }
   }
