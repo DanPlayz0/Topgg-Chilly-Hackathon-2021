@@ -12,7 +12,6 @@ module.exports = class Xmas101Client extends Client {
     });
 
     this.commands = new Collection();
-    this.slashCommands = [];
 
     this.color = "#68B88C";
 
@@ -35,7 +34,6 @@ module.exports = class Xmas101Client extends Client {
         file = require(`../commands/${dir}/${file}`);
         console.log(`Loaded command: ${file.name}`);
         this.commands.set(file.name, file);
-        this.slashCommands.push(file);
       }
     }
   }
