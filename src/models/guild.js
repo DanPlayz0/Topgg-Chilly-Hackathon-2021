@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 module.exports = model(
-  "xmasguilds",
+  "guilds",
   new Schema({
     guild: String,
     newYears: {
