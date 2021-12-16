@@ -12,7 +12,7 @@ const toys = [
 module.exports = {
   name: "guess-the-gift",
   description: "Try to guess what's inside the gift!",
-  category: "info",
+  category: "games",
   run: async (ctx) => {
     const selection = toys[Math.floor(Math.random() * toys.length)];
 
