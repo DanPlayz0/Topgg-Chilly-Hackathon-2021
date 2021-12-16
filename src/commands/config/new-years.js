@@ -14,10 +14,10 @@ module.exports = {
     },
   ],
   run: async (ctx) => {
-    // if (!ctx.interaction.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD))
-    //   return ctx.interaction.followUp(
-    //     "You require manage server perms to run this command."
-    //   );
+    if (!ctx.interaction.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD))
+      return ctx.interaction.followUp(
+        "You require manage server perms to run this command."
+      );
     ctx.interaction.followUp(
       `Set the new years channel to ${ctx.args[0].channel.toString()}`
     );
