@@ -53,14 +53,17 @@ module.exports = {
     if (trees < 3) trees = 3;
 
 
-    const canvas = Canvas.createCanvas(trees * imageSize, imageSize);
+    const canvas = Canvas.createCanvas((trees < 5 ? trees : 5)*imageSize, Math.ceil(trees/5)*imageSize);
     const ctx2 = canvas.getContext('2d');
     const [ntree, ptree] = await Promise.all([Canvas.loadImage(normalTree), Canvas.loadImage(presentTree)]);
 
     const presentTreeNum = Math.floor(Math.random() * trees) + 1;
 
-    // TODO: Make trees a grid rather than horizontal.
-    for (let i = 1; i <= trees; i++) ctx2.drawImage(presentTreeNum === i ? ptree : ntree, imageSize * i - imageSize, 0, imageSize, imageSize);
+    for (let i = 1, y = 0, x = 1; i <= trees; i++) {
+      ctx2.drawImage(presentTreeNum === i ? ptree : ntree, x, y, imageSize, imageSize);
+      if(i % 5 === 0) y += imageSize, x = 1;
+      else x += imageSize;
+    }
 
     const embed = new MessageEmbed()
       .setTitle('<a:Emoji_Present:920536936446316614> Find the Presents').setColor('#88C9F9')
