@@ -24,7 +24,7 @@ module.exports = {
     },
   ],
   run: async (ctx) => {
-    if (!ctx.interaction.member.voice)
+    if (!ctx.interaction.member.voice.channel)
       return ctx.interaction.followUp("Please join a voice channel.");
 
     const channel = ctx.interaction.member.voice.channel;
