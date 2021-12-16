@@ -53,7 +53,7 @@ module.exports = {
     if (trees < 3) trees = 3;
 
 
-    const canvas = Canvas.createCanvas((trees < 5 ? trees : 5)*imageSize, Math.ceil(trees/5)*imageSize);
+    const canvas = Canvas.createCanvas((trees < 5 ? trees : 5) * imageSize, Math.ceil(trees / 5) * imageSize);
     const ctx2 = canvas.getContext('2d');
     const [ntree, ptree] = await Promise.all([Canvas.loadImage(normalTree), Canvas.loadImage(presentTree)]);
 
@@ -61,7 +61,7 @@ module.exports = {
 
     for (let i = 1, y = 0, x = 1; i <= trees; i++) {
       ctx2.drawImage(presentTreeNum === i ? ptree : ntree, x, y, imageSize, imageSize);
-      if(i % 5 === 0) y += imageSize, x = 1;
+      if (i % 5 === 0) y += imageSize, x = 1;
       else x += imageSize;
     }
 
@@ -97,7 +97,7 @@ module.exports = {
         .setDescription(`You successfully finished with ${triesLeft} attempt${triesLeft == 1 ? '' : 's'} left`)
 
       msg.edit({
-        embeds: [embed,embed2],
+        embeds: [embed, embed2],
         components: [],
       })
     });
@@ -107,25 +107,19 @@ module.exports = {
     const array = Array.from({ length: 5 }, (_, ri) => (Array.from({ length: 5 }, (_, i) => aNumberThatIsVeryLongBecauseItIsOnlyUsedOnce++)))
 
     collector.on('collect', (interaction) => {
+      interaction.deferUpdate();
       triesLeft -= 1;
       const [ri, ti] = interaction.customId.split('_').slice(1);
 
-      if (parseInt(array[ri][ti]) === presentTreeNum) {
-        interaction.deferUpdate();
-        collector.stop('success');
-      } else if (triesLeft != 0) {
-        interaction.deferUpdate();
-        interaction.reply({
-          embeds: [
-            new MessageEmbed()
-              .setTitle('Try Again').setColor('ORANGE')
-              .setDescription(`You still have ${triesLeft} attempts and ${duration(Math.floor(Date.now() - timeLeft))} to guess the correct one.`)
-          ], ephemeral: true
-        });
-      } else {
-        interaction.deferUpdate();
-        collector.stop('fail');
-      }
+      if (triesLeft != 0) interaction.reply({
+        embeds: [
+          new MessageEmbed()
+            .setTitle('Try Again').setColor('ORANGE')
+            .setDescription(`You still have ${triesLeft} attempts and ${duration(Math.floor(Date.now() - timeLeft))} to guess the correct one.`)
+        ], ephemeral: true
+      });
+      else if (parseInt(array[ri][ti]) === presentTreeNum) collector.stop('success');
+      else collector.stop('fail');
     })
   },
 };
