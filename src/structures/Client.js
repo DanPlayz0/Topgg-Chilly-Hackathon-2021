@@ -13,6 +13,8 @@ module.exports = class Xmas101Client extends Client {
 
     this.commands = new Collection();
 
+    this.player = null;
+
     this.color = "#68B88C";
 
     this.loadCommands();
