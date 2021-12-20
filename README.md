@@ -18,7 +18,10 @@ Note: We do not recommend self hosting but here are the instructions, if you'd l
 3. Run the bot (`npm start`)
 
 
-## Future Refrences
+## Future References
 
 - [Original Announcement](https://discord.com/channels/264445053596991498/285458046006591499/916404260621660260)
 ![Image of Announcement](https://discord.mx/2hgjNWwbfA.png)
+
+- [Results](https://discord.com/channels/264445053596991498/285458046006591499/921828745982132304)
+![Image of Results](https://discord.mx/xHmL7A2UCB.gif)
